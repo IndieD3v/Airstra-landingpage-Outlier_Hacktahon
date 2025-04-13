@@ -1,12 +1,11 @@
 
 import { useState, useEffect, useRef } from "react";
 import { ArrowRight } from "lucide-react";
+import GlobeMap from "./GlobeMap";
 
 const InteractiveGlobeRouteMap = () => {
   const [activeDestination, setActiveDestination] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
-  const globeRef = useRef<HTMLDivElement>(null);
-  const [scrollY, setScrollY] = useState(0);
   
   // Luxury destinations data
   const destinations = [
@@ -58,17 +57,6 @@ const InteractiveGlobeRouteMap = () => {
   ];
   
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-  
-  useEffect(() => {
     // Rotate through destinations every 4 seconds if not hovering
     const interval = setInterval(() => {
       if (!isHovering) {
@@ -80,15 +68,6 @@ const InteractiveGlobeRouteMap = () => {
     
     return () => clearInterval(interval);
   }, [isHovering, destinations.length]);
-  
-  // Handle rotation animation of the globe
-  useEffect(() => {
-    const globeElement = document.getElementById('globe');
-    if (globeElement) {
-      const rotationAmount = (scrollY * 0.05) % 360;
-      globeElement.style.transform = `rotate(${rotationAmount}deg)`;
-    }
-  }, [scrollY]);
 
   return (
     <section className="relative py-24 bg-gray-900 overflow-hidden">
@@ -132,73 +111,13 @@ const InteractiveGlobeRouteMap = () => {
         </div>
         
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Interactive Globe */}
-          <div 
-            ref={globeRef}
-            className="relative rounded-full aspect-square border border-gray-800 max-w-xl mx-auto"
-            onMouseEnter={() => setIsHovering(true)}
-            onMouseLeave={() => setIsHovering(false)}
-          >
-            {/* Globe background with slow rotation */}
-            <div 
-              id="globe"
-              className="absolute inset-0 rounded-full transition-transform duration-1000 ease-out"
-              style={{
-                backgroundImage: `url('https://images.unsplash.com/photo-1589691962030-8d2b7f2a1ffe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center'
-              }}
-            ></div>
-            
-            {/* Decorative ring */}
-            <div className="absolute -inset-3 border-2 border-gray-800 rounded-full border-dashed animate-spin" style={{ animationDuration: '120s' }}></div>
-            
-            {/* Destination markers */}
-            {destinations.map((destination, index) => (
-              <div 
-                key={destination.id}
-                className={`absolute w-4 h-4 rounded-full cursor-pointer transition-all duration-500 z-20
-                  ${activeDestination === index ? 'scale-150 bg-amber-600' : 'bg-white bg-opacity-50 hover:bg-opacity-100'}`}
-                style={{ 
-                  left: `${destination.coordinates.x}%`, 
-                  top: `${destination.coordinates.y}%` 
-                }}
-                onClick={() => setActiveDestination(index)}
-              >
-                {/* Pulsing effect for active destination */}
-                {activeDestination === index && (
-                  <div className="absolute inset-0 bg-amber-600 rounded-full animate-ping opacity-50"></div>
-                )}
-                
-                {/* Destination label */}
-                <div className={`absolute whitespace-nowrap text-xs font-medium transform -translate-y-6 left-1/2 -translate-x-1/2 transition-opacity duration-300 text-white ${activeDestination === index ? 'opacity-100' : 'opacity-0'}`}>
-                  {destination.name}
-                </div>
-                
-                {/* Flight path from center to destination */}
-                {activeDestination === index && (
-                  <svg className="absolute inset-0 w-full h-full" style={{ zIndex: -1 }}>
-                    <line 
-                      x1="50%" 
-                      y1="50%" 
-                      x2={`${destination.coordinates.x}%`} 
-                      y2={`${destination.coordinates.y}%`} 
-                      stroke="#d97706" 
-                      strokeWidth="1" 
-                      strokeDasharray="4,4"
-                      className="animate-dash"
-                    />
-                  </svg>
-                )}
-              </div>
-            ))}
-            
-            {/* Center marker */}
-            <div className="absolute left-1/2 top-1/2 w-2 h-2 bg-white rounded-full transform -translate-x-1/2 -translate-y-1/2"></div>
+          {/* Interactive Globe - Replace with new GlobeMap component */}
+          <div className="max-w-xl mx-auto w-full">
+            <GlobeMap />
           </div>
           
           {/* Destination Information */}
-          <div className="relative overflow-hidden rounded-lg">
+          <div className="relative overflow-hidden rounded-lg glass-card backdrop-blur-md bg-black/30 border border-white/10">
             {/* Background image with overlay */}
             <div 
               className="absolute inset-0 transition-opacity duration-500 ease-in-out"

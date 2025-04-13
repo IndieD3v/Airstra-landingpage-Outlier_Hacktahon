@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
 
 @tailwind base;
@@ -120,6 +119,23 @@
   }
   .animate-slow-spin {
     animation: slow-spin 120s linear infinite;
+  }
+
+  /* Glassmorphism */
+  .glass-card {
+    @apply bg-white/90 shadow-lg border border-gray-100 rounded-xl backdrop-blur-md;
+  }
+  
+  .glass-dark {
+    @apply bg-black/30 shadow-lg border border-white/10 rounded-xl backdrop-blur-md;
+  }
+  
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
   }
 }
 
