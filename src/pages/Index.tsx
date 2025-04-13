@@ -88,7 +88,8 @@ const Index = () => {
         <div className="parallax-layer absolute bottom-[10%] left-[25%] w-96 h-96 rounded-full bg-blue-50/30 blur-3xl"></div>
       </div>
       
-      <style jsx>{`
+      <style>
+        {`
         @keyframes flyingPlane {
           0% {
             transform: translateX(-100px) translateY(0) rotate(0deg);
@@ -111,7 +112,8 @@ const Index = () => {
           pointer-events: none;
           z-index: 50;
         }
-      `}</style>
+        `}
+      </style>
       
       <Navbar />
       <Hero />
