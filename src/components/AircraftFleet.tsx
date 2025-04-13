@@ -1,9 +1,10 @@
 
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, PlaneTakeoff, PlaneLanding, Plane } from "lucide-react";
+import { PlaneTakeoff } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import AircraftCarousel from "./AircraftCarousel";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -63,11 +64,9 @@ const aircraft = [
 ];
 
 const AircraftFleet = () => {
-  const [activeAircraft, setActiveAircraft] = useState(aircraft[0]);
   const [viewMode, setViewMode] = useState("gallery");
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
-  const detailsRef = useRef<HTMLDivElement>(null);
   const planeIconRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
@@ -154,14 +153,14 @@ const AircraftFleet = () => {
           <div className="flex justify-center gap-4 pt-6">
             <Button 
               variant={viewMode === "gallery" ? "default" : "outline"} 
-              className={viewMode === "gallery" ? "btn-primary" : "btn-outline"}
+              className={viewMode === "gallery" ? "btn-primary glass-panel" : "btn-outline bg-white/20 backdrop-blur-sm"}
               onClick={() => setViewMode("gallery")}
             >
               Gallery View
             </Button>
             <Button 
               variant={viewMode === "details" ? "default" : "outline"} 
-              className={viewMode === "details" ? "btn-primary" : "btn-outline"}
+              className={viewMode === "details" ? "btn-primary glass-panel" : "btn-outline bg-white/20 backdrop-blur-sm"}
               onClick={() => setViewMode("details")}
             >
               Detailed View
@@ -174,9 +173,8 @@ const AircraftFleet = () => {
             {aircraft.map((craft) => (
               <div 
                 key={craft.id} 
-                className="fleet-card hover:shadow-lg transition-all"
+                className="fleet-card hover:shadow-lg transition-all glass-card"
                 onClick={() => {
-                  setActiveAircraft(craft);
                   setViewMode("details");
                 }}
               >
@@ -187,7 +185,7 @@ const AircraftFleet = () => {
                     className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                   />
                 </div>
-                <div className="fleet-info">
+                <div className="fleet-info bg-gradient-to-t from-black/80 via-black/40 to-transparent backdrop-blur-sm">
                   <h3 className="text-xl font-bold mb-1">{craft.name}</h3>
                   <p className="text-amber-300 text-sm mb-4">{craft.category}</p>
                   <div className="grid grid-cols-2 gap-4 text-sm">
@@ -205,59 +203,10 @@ const AircraftFleet = () => {
             ))}
           </div>
         ) : (
-          <div ref={detailsRef} className="bg-white rounded-2xl shadow-xl overflow-hidden p-1">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="relative h-96 lg:h-auto overflow-hidden">
-                <img 
-                  src={activeAircraft.image} 
-                  alt={activeAircraft.name} 
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute top-4 left-4 bg-amber-600 text-white px-4 py-2 rounded-full text-sm font-medium">
-                  {activeAircraft.category}
-                </div>
-              </div>
-              
-              <div className="p-8 space-y-6 flex flex-col justify-center">
-                <div>
-                  <h3 className="text-3xl font-serif font-bold text-gray-800 mb-2">{activeAircraft.name}</h3>
-                  <p className="text-gray-700">{activeAircraft.description}</p>
-                </div>
-                
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                  <div className="bg-amber-50 p-4 rounded-lg">
-                    <p className="text-sm text-gray-700 mb-1">Range</p>
-                    <p className="text-lg font-medium text-gray-800">{activeAircraft.specs.range}</p>
-                  </div>
-                  <div className="bg-amber-50 p-4 rounded-lg">
-                    <p className="text-sm text-gray-700 mb-1">Passengers</p>
-                    <p className="text-lg font-medium text-gray-800">{activeAircraft.specs.passengers}</p>
-                  </div>
-                  <div className="bg-amber-50 p-4 rounded-lg">
-                    <p className="text-sm text-gray-700 mb-1">Speed</p>
-                    <p className="text-lg font-medium text-gray-800">{activeAircraft.specs.speed}</p>
-                  </div>
-                  <div className="bg-amber-50 p-4 rounded-lg">
-                    <p className="text-sm text-gray-700 mb-1">Cabin Height</p>
-                    <p className="text-lg font-medium text-gray-800">{activeAircraft.specs.height}</p>
-                  </div>
-                </div>
-                
-                <div className="space-y-4">
-                  <Button className="btn-primary w-full">Schedule a Tour</Button>
-                  <Button variant="outline" className="btn-outline w-full flex items-center justify-center gap-2">
-                    <Plane className="h-4 w-4" /> View All Aircraft
-                  </Button>
-                </div>
-                
-                <div className="flex justify-end">
-                  <Button variant="ghost" onClick={() => setViewMode("gallery")} className="text-amber-600">
-                    Back to Gallery
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <AircraftCarousel 
+            aircraft={aircraft} 
+            onBackToGallery={() => setViewMode("gallery")} 
+          />
         )}
       </div>
     </div>

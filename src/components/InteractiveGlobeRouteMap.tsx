@@ -1,11 +1,10 @@
 
 import { useState, useEffect, useRef } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import GlobeMap from "./GlobeMap";
 
 const InteractiveGlobeRouteMap = () => {
   const [activeDestination, setActiveDestination] = useState(0);
-  const [isHovering, setIsHovering] = useState(false);
   
   // Luxury destinations data
   const destinations = [
@@ -56,18 +55,37 @@ const InteractiveGlobeRouteMap = () => {
     }
   ];
   
+  const autoplayRef = useRef<NodeJS.Timeout | null>(null);
+  
+  const goToNextDestination = () => {
+    setActiveDestination((prev) => (prev + 1) % destinations.length);
+  };
+  
+  const goToPrevDestination = () => {
+    setActiveDestination((prev) => (prev - 1 + destinations.length) % destinations.length);
+  };
+
   useEffect(() => {
-    // Rotate through destinations every 4 seconds if not hovering
-    const interval = setInterval(() => {
-      if (!isHovering) {
-        setActiveDestination((prev) => 
-          prev === destinations.length - 1 ? 0 : prev + 1
-        );
-      }
-    }, 4000);
+    // Auto-rotate through destinations
+    autoplayRef.current = setInterval(goToNextDestination, 6000);
     
-    return () => clearInterval(interval);
-  }, [isHovering, destinations.length]);
+    return () => {
+      if (autoplayRef.current) {
+        clearInterval(autoplayRef.current);
+      }
+    };
+  }, []);
+
+  const stopAutoplay = () => {
+    if (autoplayRef.current) {
+      clearInterval(autoplayRef.current);
+    }
+  };
+
+  const restartAutoplay = () => {
+    stopAutoplay();
+    autoplayRef.current = setInterval(goToNextDestination, 6000);
+  };
 
   return (
     <section className="relative py-24 bg-gray-900 overflow-hidden">
@@ -111,13 +129,35 @@ const InteractiveGlobeRouteMap = () => {
         </div>
         
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Interactive Globe - Replace with new GlobeMap component */}
+          {/* Interactive Globe */}
           <div className="max-w-xl mx-auto w-full">
             <GlobeMap />
           </div>
           
-          {/* Destination Information */}
-          <div className="relative overflow-hidden rounded-lg glass-card backdrop-blur-md bg-black/30 border border-white/10">
+          {/* Destination Carousel */}
+          <div className="relative overflow-hidden rounded-lg glass-dark backdrop-blur-md">
+            {/* Navigation arrows */}
+            <button 
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 p-2 rounded-full text-white transition-all"
+              onClick={() => {
+                goToPrevDestination();
+                stopAutoplay();
+                restartAutoplay();
+              }}
+            >
+              <ChevronLeft size={24} />
+            </button>
+            <button 
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 p-2 rounded-full text-white transition-all"
+              onClick={() => {
+                goToNextDestination();
+                stopAutoplay();
+                restartAutoplay();
+              }}
+            >
+              <ChevronRight size={24} />
+            </button>
+            
             {/* Background image with overlay */}
             <div 
               className="absolute inset-0 transition-opacity duration-500 ease-in-out"
@@ -144,17 +184,17 @@ const InteractiveGlobeRouteMap = () => {
                     {destination.description}
                   </p>
                   
-                  <div className="bg-gray-900 bg-opacity-50 inline-block px-4 py-2 mb-8 border-l-2 border-amber-600">
+                  <div className="bg-gray-900/50 inline-block px-4 py-2 mb-8 border-l-2 border-amber-600 backdrop-blur-sm">
                     <span className="text-sm text-gray-400">Average Flight Time:</span>
                     <p className="text-white">{destination.flight_time}</p>
                   </div>
                   
                   <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                    <button className="bg-amber-600 text-white px-6 py-3 flex items-center group">
+                    <button className="bg-amber-600/90 backdrop-blur-sm text-white px-6 py-3 flex items-center group rounded-md">
                       <span>PLAN YOUR JOURNEY</span>
                       <ArrowRight className="w-4 h-4 ml-2 transform transition-transform group-hover:translate-x-1" />
                     </button>
-                    <button className="border border-gray-700 px-6 py-3 text-white hover:bg-gray-800 transition-colors">
+                    <button className="border border-white/20 px-6 py-3 text-white hover:bg-white/10 transition-colors rounded-md backdrop-blur-sm">
                       EXPLORE DESTINATION
                     </button>
                   </div>
@@ -167,7 +207,11 @@ const InteractiveGlobeRouteMap = () => {
               {destinations.map((_, index) => (
                 <button 
                   key={index}
-                  onClick={() => setActiveDestination(index)}
+                  onClick={() => {
+                    setActiveDestination(index);
+                    stopAutoplay();
+                    restartAutoplay();
+                  }}
                   className={`w-2 h-2 rounded-full transition-all duration-300 ${activeDestination === index ? 'bg-amber-600 w-6' : 'bg-gray-600 hover:bg-gray-400'}`}
                 />
               ))}
@@ -177,18 +221,16 @@ const InteractiveGlobeRouteMap = () => {
       </div>
       
       {/* Custom animation for the flight path */}
-      <style>
-        {`
-          @keyframes dash {
-            to {
-              stroke-dashoffset: 24;
-            }
+      <style jsx>{`
+        @keyframes dash {
+          to {
+            stroke-dashoffset: 24;
           }
-          .animate-dash {
-            animation: dash 1s linear infinite;
-          }
-        `}
-      </style>
+        }
+        .animate-dash {
+          animation: dash 1s linear infinite;
+        }
+      `}</style>
     </section>
   );
 };

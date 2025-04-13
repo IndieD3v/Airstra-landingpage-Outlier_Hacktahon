@@ -18,8 +18,8 @@ const GlobeMap = () => {
     useEffect(() => {
         if (!globeRef.current) return;
 
-        // Initialize the globe
-        const globe = Globe()
+        // Initialize the globe - note the use of 'new' keyword to fix the TS error
+        const globe = new Globe()
             .globeImageUrl('https://raw.githubusercontent.com/vasturiano/three-globe/master/example/img/earth-day.jpg')
             .backgroundColor('#ffffff00') // Transparent background for glassmorphism
             .showAtmosphere(true)

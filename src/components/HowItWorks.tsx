@@ -11,25 +11,29 @@ const steps = [
     id: 1,
     icon: <Users className="h-8 w-8 text-amber-600" />,
     title: "Join Our Network",
-    description: "Apply for membership to our exclusive community of private jet owners and gain access to our fleet."
+    description: "Apply for membership to our exclusive community of private jet owners and gain access to our fleet.",
+    image: "https://images.unsplash.com/photo-1522878129833-838a904a0e9e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
   },
   {
     id: 2,
     icon: <CreditCard className="h-8 w-8 text-amber-600" />,
     title: "Choose Your Plan",
-    description: "Select the ownership plan that aligns with your travel needs, whether occasional use or frequent flying."
+    description: "Select the ownership plan that aligns with your travel needs, whether occasional use or frequent flying.",
+    image: "https://images.unsplash.com/photo-1589758438368-0ad531db3366?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
   },
   {
     id: 3,
     icon: <CalendarClock className="h-8 w-8 text-amber-600" />,
     title: "Book Your Flights",
-    description: "Use our intuitive app to schedule flights with as little as 24 hours notice."
+    description: "Use our intuitive app to schedule flights with as little as 24 hours notice.",
+    image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2047&q=80"
   },
   {
     id: 4,
     icon: <Plane className="h-8 w-8 text-amber-600" />,
     title: "Enjoy Seamless Travel",
-    description: "Arrive 15 minutes before your flight and experience luxury travel without any of the hassles."
+    description: "Arrive 15 minutes before your flight and experience luxury travel without any of the hassles.",
+    image: "https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
   }
 ];
 
@@ -102,18 +106,27 @@ const HowItWorks = () => {
             ref={el => {
               if (el) cardsRef.current[index] = el;
             }}
-            className="glass-card p-6 hover:shadow-lg transition-all duration-300 group"
+            className="glass-card p-0 hover:shadow-lg transition-all duration-300 group overflow-hidden rounded-xl"
           >
-            <div className="mb-4 flex justify-between items-center">
-              <div className="p-3 bg-amber-50 rounded-lg group-hover:bg-amber-100 transition-colors">
-                {step.icon}
-              </div>
-              <span className="text-4xl font-serif font-bold text-amber-200 group-hover:text-amber-300 transition-colors">
-                {step.id}
-              </span>
+            <div className="h-48 overflow-hidden">
+              <img 
+                src={step.image} 
+                alt={step.title}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
             </div>
-            <h3 className="text-xl font-medium mb-2 text-gray-800">{step.title}</h3>
-            <p className="text-gray-600">{step.description}</p>
+            <div className="p-6">
+              <div className="mb-4 flex justify-between items-center">
+                <div className="p-3 bg-amber-50/70 backdrop-blur-sm rounded-lg group-hover:bg-amber-100 transition-colors">
+                  {step.icon}
+                </div>
+                <span className="text-4xl font-serif font-bold text-amber-200 group-hover:text-amber-300 transition-colors">
+                  {step.id}
+                </span>
+              </div>
+              <h3 className="text-xl font-medium mb-2 text-gray-800">{step.title}</h3>
+              <p className="text-gray-600">{step.description}</p>
+            </div>
           </div>
         ))}
       </div>
