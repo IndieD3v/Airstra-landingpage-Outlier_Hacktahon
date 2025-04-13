@@ -77,14 +77,6 @@
     transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
-  /* Flying Plane Animation */
-  .plane-path {
-    position: fixed;
-    z-index: 10;
-    transition: all 0.3s ease-out;
-    pointer-events: none;
-  }
-
   /* Parallax Scrolling Effects */
   .parallax-bg {
     background-attachment: fixed;
@@ -105,6 +97,29 @@
   /* Gradient Text */
   .gradient-text {
     @apply text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-amber-400;
+  }
+  
+  /* Dash Animation for Globe Routes */
+  @keyframes dash {
+    to {
+      stroke-dashoffset: 24;
+    }
+  }
+  .animate-dash {
+    animation: dash 1s linear infinite;
+  }
+  
+  /* Spinning Animation */
+  @keyframes slow-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .animate-slow-spin {
+    animation: slow-spin 120s linear infinite;
   }
 }
 
@@ -144,27 +159,10 @@
   transform: translateY(0);
 }
 
-/* Flying Plane Animation */
-@keyframes flyPlane {
-  0% {
-    transform: translateX(-100px) translateY(0) rotate(0deg);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(calc(100vw + 100px)) translateY(-100px) rotate(15deg);
-    opacity: 0;
-  }
-}
-
-.flying-plane {
-  animation: flyPlane 20s linear infinite;
-  position: absolute;
-  z-index: 10;
-  pointer-events: none;
+/* Gold gradient text */
+.gold-gradient-text {
+  background: linear-gradient(to right, #d97706, #fbbf24);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
