@@ -7,33 +7,33 @@
 
 @layer base {
   :root {
-    --background: 215 33% 12%;
-    --foreground: 0 0% 98%;
+    --background: 0 0% 100%;
+    --foreground: 215 33% 12%;
 
-    --card: 215 33% 18%;
-    --card-foreground: 0 0% 95%;
+    --card: 0 0% 98%;
+    --card-foreground: 215 33% 12%;
 
-    --popover: 215 33% 18%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 0 0% 98%;
+    --popover-foreground: 215 33% 12%;
 
-    --primary: 45 50% 58%;
-    --primary-foreground: 215 33% 12%;
+    --primary: 25 100% 50%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 16% 96%;
-    --secondary-foreground: 215 33% 12%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 220 20% 25%;
 
-    --muted: 215 20% 25%;
-    --muted-foreground: 215 10% 70%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215 25% 40%;
 
-    --accent: 220 68% 48%;
-    --accent-foreground: 0 0% 95%;
+    --accent: 210 40% 90%;
+    --accent-foreground: 220 20% 25%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 215 20% 25%;
-    --input: 215 20% 25%;
-    --ring: 45 50% 58%;
+    --border: 220 20% 90%;
+    --input: 220 20% 90%;
+    --ring: 25 100% 50%;
 
     --radius: 0.5rem;
   }
@@ -44,17 +44,17 @@
   }
 
   body {
-    @apply bg-jet-navy text-foreground;
+    @apply bg-white text-foreground;
   }
 }
 
 @layer components {
   .glass-card {
-    @apply backdrop-blur-md bg-white/10 border border-white/20 rounded-xl;
+    @apply bg-white/90 shadow-lg border border-gray-100 rounded-xl;
   }
   
-  .gold-gradient-text {
-    @apply text-transparent bg-clip-text bg-gradient-gold;
+  .luxury-text {
+    @apply text-amber-600;
   }
   
   .section-container {
@@ -62,11 +62,11 @@
   }
   
   .btn-primary {
-    @apply bg-jet-gold hover:bg-jet-gold/90 text-jet-navy px-6 py-3 rounded-md font-medium transition-all;
+    @apply bg-amber-600 hover:bg-amber-700 text-white px-6 py-3 rounded-md font-medium transition-all;
   }
   
   .btn-outline {
-    @apply border border-jet-gold text-jet-gold hover:bg-jet-gold/10 px-6 py-3 rounded-md font-medium transition-all;
+    @apply border border-amber-600 text-amber-600 hover:bg-amber-50 px-6 py-3 rounded-md font-medium transition-all;
   }
   
   .parallax-layer {

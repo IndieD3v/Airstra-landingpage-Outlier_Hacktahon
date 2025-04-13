@@ -69,7 +69,8 @@ export default {
 					gold: '#C6A662',
 					platinum: '#E5E4E2',
 					accent: '#185ADB',
-					dark: '#050A18'
+					dark: '#050A18',
+					light: '#FFFFFF'
 				}
 			},
 			fontFamily: {
@@ -137,9 +138,8 @@ export default {
 				'globe': 'globe 120s linear infinite'
 			},
 			backgroundImage: {
-				'hero-pattern': 'linear-gradient(to bottom, rgba(10,25,49,0.85), rgba(5,10,24,0.95)), url("/hero-bg.jpg")',
-				'gradient-gold': 'linear-gradient(90deg, #C6A662 0%, #E5E4E2 100%)',
-				'gradient-dark': 'linear-gradient(90deg, #0A1931 0%, #111827 100%)'
+				'hero-pattern': 'linear-gradient(to bottom, rgba(255,255,255,0.95), rgba(255,255,255,0.92)), url("/hero-bg.jpg")',
+				'luxury-gradient': 'linear-gradient(90deg, #C6A662 30%, #E5E4E2 100%)'
 			}
 		}
 	},

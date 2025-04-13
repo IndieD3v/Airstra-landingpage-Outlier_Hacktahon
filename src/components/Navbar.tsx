@@ -18,21 +18,21 @@ const Navbar = () => {
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-jet-navy/90 backdrop-blur-md py-3 shadow-md" : "bg-transparent py-5"
+        scrolled ? "bg-white/90 backdrop-blur-md py-3 shadow-md" : "bg-transparent py-5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Plane className="text-jet-gold h-8 w-8" />
-            <span className="text-2xl font-serif font-bold text-white">SkyBound</span>
+            <Plane className="text-amber-600 h-8 w-8" />
+            <span className="text-2xl font-serif font-bold text-gray-800">SkyBound</span>
           </div>
           
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#how-it-works" className="text-white hover:text-jet-gold transition-colors">How It Works</a>
-            <a href="#fleet" className="text-white hover:text-jet-gold transition-colors">Our Fleet</a>
-            <a href="#benefits" className="text-white hover:text-jet-gold transition-colors">Benefits</a>
-            <a href="#testimonials" className="text-white hover:text-jet-gold transition-colors">Testimonials</a>
+            <a href="#how-it-works" className="text-gray-800 hover:text-amber-600 transition-colors">How It Works</a>
+            <a href="#benefits" className="text-gray-800 hover:text-amber-600 transition-colors">Benefits</a>
+            <a href="#fleet" className="text-gray-800 hover:text-amber-600 transition-colors">Our Fleet</a>
+            <a href="#testimonials" className="text-gray-800 hover:text-amber-600 transition-colors">Testimonials</a>
           </div>
           
           <div>
