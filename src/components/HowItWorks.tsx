@@ -92,7 +92,7 @@ const HowItWorks = () => {
           ref={titleRef}
           className="text-3xl md:text-4xl font-serif font-bold"
         >
-          How <span className="luxury-text">SkyBound</span> Works
+          How <span className="luxury-text">Airstra</span> Works
         </h2>
         <p className="text-gray-600 max-w-2xl mx-auto">
           Our co-ownership model makes private aviation accessible, flexible, and cost-effective.

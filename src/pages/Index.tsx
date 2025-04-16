@@ -13,6 +13,7 @@ import CallToAction from "@/components/CallToAction";
 import Footer from "@/components/Footer";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ServicesSection from "@/components/ServicesSection";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -52,15 +53,17 @@ const Index = () => {
       
       <Navbar />
       <Hero />
-      <HowItWorks />
-      <WhyCoOwnership />
       <InteractiveGlobeRouteMap />
       <ImmersiveCabinExperience />
+      <ServicesSection />
       <AircraftFleet />
       <MembershipPlans />
       <Testimonials />
       <CallToAction />
       <Footer />
+
+      {/* <HowItWorks />
+      <WhyCoOwnership /> */}
     </div>
   );
 };

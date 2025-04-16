@@ -18,17 +18,17 @@ const Navbar = () => {
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-white/90 backdrop-blur-md py-3 shadow-md" : "bg-transparent py-5"
+        scrolled ? "bg-white/80 backdrop-blur-3xl py-3 shadow-md" : "bg-transparent py-5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Plane className="text-amber-600 h-8 w-8" />
-            <span className="text-2xl font-serif font-bold text-gray-800">SkyBound</span>
+            <img width={24} src="/logo.png" alt="Airstra Logo" className="" />
+            <span className="text-xl font-serif font-bold text-gray-800">Airstra</span>
           </div>
           
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden text-sm md:flex items-center space-x-8">
             <a href="#how-it-works" className="text-gray-800 hover:text-amber-600 transition-colors">How It Works</a>
             <a href="#benefits" className="text-gray-800 hover:text-amber-600 transition-colors">Benefits</a>
             <a href="#fleet" className="text-gray-800 hover:text-amber-600 transition-colors">Our Fleet</a>

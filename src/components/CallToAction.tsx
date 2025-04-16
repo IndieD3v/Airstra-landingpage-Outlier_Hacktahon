@@ -34,7 +34,7 @@ const CallToAction = () => {
   }, []);
 
   return (
-    <div ref={sectionRef} className="section-container py-24">
+    <div ref={sectionRef} className="section-container py-24 bg-primary">
       <div className="relative rounded-2xl overflow-hidden shadow-2xl">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-r from-white/95 to-white/80"></div>

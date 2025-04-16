@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import Globe from 'globe.gl';
 import gsap from 'gsap';
@@ -18,14 +17,19 @@ const GlobeMap = () => {
     useEffect(() => {
         if (!globeRef.current) return;
 
+        const isMobileOrTablet = window.innerWidth < 1024; // Adjust breakpoint as needed
+        const globeOffsetConfig = isMobileOrTablet ? [0, -30] : [-150, -60];
+        const initialAltitude = isMobileOrTablet ? 2.5 : 1.8;
+
         // Initialize the globe - note the use of 'new' keyword to fix the TS error
         const globe = new Globe()
+            .globeOffset(globeOffsetConfig)
             .globeImageUrl('https://raw.githubusercontent.com/vasturiano/three-globe/master/example/img/earth-day.jpg')
             .backgroundColor('#ffffff00') // Transparent background for glassmorphism
             .showAtmosphere(true)
             .atmosphereColor('#aac')
-            .atmosphereAltitude(0.25)
-            .pointOfView({ lat: 20, lng: 0, altitude: 1.8 }, 2000)
+            .atmosphereAltitude(0.15)
+            .pointOfView({ lat: 20, lng: 0, altitude: initialAltitude }, 2000)
             .htmlElementsData(fleetLocations)
             .htmlElement(d => {
                 const container = document.createElement('div');
@@ -34,7 +38,7 @@ const GlobeMap = () => {
                 const nameEl = document.createElement('div');
                 nameEl.innerHTML = d.name;
                 nameEl.style.width = '100px';
-                nameEl.style.color = 'black';
+                nameEl.style.color = 'white';
                 nameEl.style.backdropFilter = 'blur(10px)';
                 nameEl.style.fontSize = '12px';
                 nameEl.style.fontWeight = 'bold';
@@ -52,7 +56,7 @@ const GlobeMap = () => {
                 pinEl.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>';
                 pinEl.style.position = 'absolute';
                 pinEl.style.transform = 'translate(-50%, 0)';
-                pinEl.style.color = '#d97706'; // Amber color to match theme
+                pinEl.style.color = 'white'; // Amber color to match theme
 
                 container.appendChild(nameEl);
                 container.appendChild(pinEl);
@@ -66,7 +70,7 @@ const GlobeMap = () => {
         // Animation for globe appearance using GSAP
         gsap.fromTo(globeRef.current, {
             opacity: 0,
-            y: 100
+            y: -100
         }, {
             opacity: 1,
             y: 0,
@@ -81,7 +85,7 @@ const GlobeMap = () => {
             globeInstanceRef.current.pointOfView({
                 lat: 20,
                 lng: currentLng,
-                altitude: 1.8
+                altitude: initialAltitude
             });
             requestAnimationFrame(rotateGlobe);
         };
@@ -96,8 +100,8 @@ const GlobeMap = () => {
     }, []);
 
     return (
-        <div className="w-full h-[600px] rounded-2xl shadow-xl overflow-hidden border border-gray-100 glass-card bg-white/10 backdrop-blur-md">
-            <div ref={globeRef} className="w-full h-full" />
+        <div className="w-full -z-10 h-[400px] md:h-[600px] flex justify-center items-center">
+            <div ref={globeRef} className="w-full max-w-md md:max-w-xl h-full" />
         </div>
     );
 };

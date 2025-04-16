@@ -8,8 +8,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div>
             <div className="flex items-center space-x-2 mb-6">
-              <Plane className="text-jet-gold h-8 w-8" />
-              <span className="text-2xl font-serif font-bold text-white">SkyBound</span>
+              <img width={24} src="/logo.png" alt="Airstra Logo" className="" />
+              <span className="text-xl font-serif font-bold text-white">Airstra</span>
             </div>
             <p className="text-gray-300 mb-6">
               Redefining private aviation through innovative co-ownership, making luxury travel more accessible than ever.
@@ -74,7 +74,7 @@ const Footer = () => {
             <ul className="space-y-4">
               <li className="flex items-start">
                 <Mail className="h-5 w-5 text-jet-gold mr-3 mt-1 shrink-0" />
-                <span className="text-gray-300">info@skybound.com</span>
+                <span className="text-gray-300">info@airstra.com</span>
               </li>
               <li className="flex items-start">
                 <Phone className="h-5 w-5 text-jet-gold mr-3 mt-1 shrink-0" />
@@ -83,7 +83,7 @@ const Footer = () => {
               <li className="flex items-start">
                 <MapPin className="h-5 w-5 text-jet-gold mr-3 mt-1 shrink-0" />
                 <span className="text-gray-300">
-                  SkyBound Headquarters<br />
+                  Airstra Headquarters<br />
                   100 Aviation Way<br />
                   New York, NY 10001
                 </span>
@@ -94,7 +94,7 @@ const Footer = () => {
         
         <div className="mt-12 pt-8 border-t border-gray-800">
           <p className="text-center text-gray-400 text-sm">
-            &copy; {new Date().getFullYear()} SkyBound Collective. All rights reserved.
+            &copy; {new Date().getFullYear()} Airstra Collective. All rights reserved.
           </p>
         </div>
       </div>

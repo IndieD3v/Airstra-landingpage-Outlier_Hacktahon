@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Plane } from "lucide-react";
@@ -12,40 +11,52 @@ const Hero = () => {
   const textRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const planeRef = useRef<HTMLDivElement>(null);
-  
+
   useEffect(() => {
     if (!heroRef.current) return;
-    
+
     const tl = gsap.timeline();
-    
-    // Animate hero elements
-    tl.fromTo(
-      textRef.current,
-      { x: -50, opacity: 0 },
-      { x: 0, opacity: 1, duration: 1, ease: "power3.out" }
-    ).fromTo(
-      imageRef.current,
-      { x: 50, opacity: 0 },
-      { x: 0, opacity: 1, duration: 1, ease: "power3.out" },
-      "-=0.5"
-    ).fromTo(
-      planeRef.current,
-      { x: -100, y: 100, opacity: 0 },
-      { x: 0, y: 0, opacity: 1, duration: 1.5, ease: "power2.out" },
-      "-=0.2"
-    );
-    
+
+    tl.from(textRef.current, {
+      y: -40,
+      opacity: 0,
+      duration: 1,
+      ease: "power2.out"
+    });
+
+    // Plane image fly-in from right
+    tl.from(".plane", {
+      y: 10,
+      opacity: 0,
+      duration: 1.2,
+      ease: "power2.out"
+    }, "-=0.8"); // Overlap with text animation
+
+
     // Flying plane animation
-    gsap.to(planeRef.current, {
-      x: "random([-20, 20])",
-      y: "random([-20, 20])",
-      rotation: "random([-5, 5])",
+    gsap.to('.plane', {
+      x: "random([-10, 10])",
+      y: "random([-10, 10])",
+      rotation: "random([-2, 2])",
       duration: 3,
       repeat: -1,
       yoyo: true,
-      ease: "sine.inOut"
+      ease: "sine.inOut",
     });
-    
+
+    // move the plane up while scroll
+    tl.to('.plane-wrapper', {
+      y: 100,
+      scrollTrigger: {
+        trigger: heroRef.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+        invalidateOnRefresh: true
+      }
+    });
+
+
     // Parallax effect on scroll
     gsap.utils.toArray('.parallax-layer').forEach((layer: any, i) => {
       const depth = i * 0.1;
@@ -61,83 +72,58 @@ const Hero = () => {
         }
       });
     });
-    
+
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, []);
 
   return (
-    <div ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden">
+    <div ref={heroRef} className="relative min-h-screen w-screen flex items-center justify-center overflow-hidden">
       {/* Hero Background with Parallax */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-b from-blue-50 to-white opacity-90"></div>
-        <img 
-          src="https://images.unsplash.com/photo-1531642765602-5cdb0c8d5132?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3270&q=80" 
-          alt="Private jet flying through clouds" 
+        <img
+          src="/sky_bg.webp"
+          alt="Private jet flying through clouds"
           className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="parallax-layer absolute top-[10%] left-[15%] w-64 h-64 rounded-full bg-amber-100/40 blur-3xl"></div>
-        <div className="parallax-layer absolute top-[30%] right-[20%] w-80 h-80 rounded-full bg-blue-50/30 blur-3xl"></div>
-        <div className="parallax-layer absolute bottom-[10%] left-[30%] w-72 h-72 rounded-full bg-amber-50/30 blur-3xl"></div>
+        <div className="parallax-layer absolute top-[10%] left-[15%] w-32 h-32 md:w-64 md:h-64 rounded-full bg-white/30 blur-3xl"></div>
+        <div className="parallax-layer absolute top-[30%] right-[5%] md:right-[20%] w-40 h-40 md:w-80 md:h-80 rounded-full bg-white/30 blur-3xl"></div>
+        <div className="parallax-layer absolute bottom-[5%] left-[10%] md:left-[30%] w-36 h-36 md:w-72 md:h-72 rounded-full bg-white/30 blur-3xl"></div>
       </div>
-      
-      <div ref={planeRef} className="absolute z-20 right-[5%] top-[15%]">
-        <Plane className="text-amber-600 h-16 w-16 transform -rotate-45" />
+
+      {/* Removed the fixed right positioning for better mobile flow */}
+      <div ref={planeRef} className="absolute z-20 top-[15%] right-1/2 transform translate-x-1/2 md:right-[5%] md:translate-x-0">
+        {/* <Plane className="text-amber-600 h-10 w-10 md:h-16 md:w-16 transform -rotate-45" /> */}
       </div>
-      
-      <div className="flying-plane absolute z-20 left-0 top-1/3">
-        <Plane className="text-amber-600 h-8 w-8 transform -rotate-12" />
+
+      <div className="flying-plane absolute z-20 left-5 top-1/4 md:left-0 md:top-1/3">
+        {/* <Plane className="text-amber-600 h-6 w-6 md:h-8 md:w-8 transform -rotate-12" /> */}
       </div>
-      
-      <div className="section-container relative z-10 mt-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div ref={textRef} className="space-y-6">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold leading-tight">
-              <span className="gradient-text">Elevate</span> Your Travel Experience Through Co-Ownership
-            </h1>
-            <p className="text-lg md:text-xl text-gray-700">
-              Experience the luxury and convenience of private jet travel without the full cost of ownership. Join our exclusive network of entrepreneurs and business leaders.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button className="btn-primary text-lg flex items-center gap-2">
-                Explore Memberships <ArrowRight className="h-5 w-5" />
-              </Button>
-              <Button variant="outline" className="btn-outline text-lg">
-                Learn More
-              </Button>
-            </div>
-          </div>
-          
-          <div ref={imageRef} className="lg:pl-10">
-            <div className="relative">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-400 to-amber-600 rounded-2xl blur opacity-30"></div>
-              <div className="glass-card relative overflow-hidden rounded-2xl shadow-xl">
-                <img 
-                  src="https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-                  alt="Luxury private jet interior" 
-                  className="w-full h-auto rounded-2xl transform transition-transform duration-700 hover:scale-105"
-                />
-                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-white/90 to-transparent">
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <h3 className="text-gray-800 font-medium text-lg">G650 Flagship</h3>
-                      <p className="text-gray-700 text-sm">Ultra-long range luxury</p>
-                    </div>
-                    <div className="bg-amber-600/90 rounded-full px-4 py-1">
-                      <span className="text-white font-medium">New</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="absolute -bottom-6 -right-6 animate-float">
-                <div className="bg-amber-600/90 text-white font-medium rounded-full px-5 py-2 shadow-xl">
-                  50% Lower Cost
-                </div>
-              </div>
-            </div>
-          </div>
+
+      <div ref={textRef} className="section-container gap-4 relative z-10 -mt-[150px] md:-mt-[200px] flex w-full md:w-1/2 flex-col items-center text-center px-4 sm:px-6">
+        <div className="space-y-4 md:space-y-6">
+          <h1 className="text-3xl md:text-3xl lg:text-[2.45rem] text-center font-serif font-bold leading-tight">
+            <span className="text-primary">Elevate</span> Your Travel Experience Through Co-Ownership
+          </h1>
+          <p className="text-md md:text-md text-gray-700">
+            Experience the luxury and convenience of private jet travel without the full cost of ownership. Join our exclusive network of entrepreneurs and business leaders.
+          </p>
         </div>
+        <div className="flex  sm:flex-row gap-3 pt-4">
+          <a href="#benefits" >
+            <Button className="btn-primary text-xs md:text-sm flex items-center gap-2">
+              Explore Memberships <ArrowRight className="h-4 w-4 md:h-5 md:w-5" />
+            </Button>
+          </a>
+          <Button variant="outline" className="btn-outline text-xs md:text-sm">
+            Learn More
+          </Button>
+        </div>
+      </div>
+      <div className="plane-wrapper absolute z-5 bottom-24 right-1/2 transform translate-x-1/2 md:-right-10 md:top-[20rem] lg:top-[10rem] md:translate-x-0">
+        <img src="/jet.webp" alt="Jet" className="scale-[3] plane md:scale-75 rotate-[7deg] brightness-150" />
       </div>
     </div>
   );
