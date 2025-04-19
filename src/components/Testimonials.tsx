@@ -1,5 +1,6 @@
-
-import { useRef, useState } from "react";
+import { useRef, useState, useLayoutEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 
 const testimonials = [
@@ -26,9 +27,7 @@ const testimonials = [
   }
 ];
 
-import { useLayoutEffect, } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 
 gsap.registerPlugin(ScrollTrigger);
 

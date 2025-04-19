@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
 
 @tailwind base;
@@ -52,23 +51,23 @@
   .glass-card {
     @apply bg-white/75 shadow-lg border border-white/20 rounded-xl backdrop-blur-md;
   }
-  
+
   .luxury-text {
     @apply text-amber-600;
   }
-  
+
   .section-container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24;
   }
-  
+
   .btn-primary {
     @apply bg-amber-600 hover:bg-amber-700 text-white px-6 py-3 rounded-md font-medium transition-all;
   }
-  
+
   .btn-outline {
     @apply border border-amber-600 text-amber-600 hover:bg-amber-50 px-6 py-3 rounded-md font-medium transition-all;
   }
-  
+
   .parallax-layer {
     will-change: transform;
   }
@@ -89,48 +88,21 @@
   .fleet-item {
     @apply transition-all duration-300 ease-out cursor-pointer;
   }
-  
+
   .fleet-item:hover {
     @apply transform scale-105 shadow-xl;
   }
-  
-  /* Gradient Text */
-  .gradient-text {
-    @apply text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-amber-400;
-  }
-  
-  /* Dash Animation for Globe Routes */
-  @keyframes dash {
-    to {
-      stroke-dashoffset: 24;
-    }
-  }
-  .animate-dash {
-    animation: dash 1s linear infinite;
-  }
-  
-  /* Spinning Animation */
-  @keyframes slow-spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  .animate-slow-spin {
-    animation: slow-spin 120s linear infinite;
-  }
+
 
   /* Enhanced Glassmorphism */
   .glass-card {
     @apply bg-white/70 shadow-lg border border-white/30 rounded-xl backdrop-blur-lg;
   }
-  
+
   .glass-dark {
     @apply bg-black/40 shadow-lg border border-white/10 rounded-xl backdrop-blur-md;
   }
-  
+
   .glass-panel {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(12px);
@@ -138,24 +110,6 @@
     border: 1px solid rgba(255, 255, 255, 0.18);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
     @apply rounded-md;
-  }
-  
-  /* Light glassmorphism effect */
-  .glass-light {
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    @apply shadow-md rounded-lg;
-  }
-  
-  /* Frosted glass effect */
-  .glass-frost {
-    background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(15px) saturate(180%);
-    -webkit-backdrop-filter: blur(15px) saturate(180%);
-    border: 1px solid rgba(209, 213, 219, 0.3);
-    @apply shadow-lg rounded-xl;
   }
 }
 
@@ -184,7 +138,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
   padding: 2rem 1.5rem 1.5rem;
   color: white;
   transform: translateY(30%);
@@ -195,45 +149,19 @@
   transform: translateY(0);
 }
 
-/* Gold gradient text */
-.gold-gradient-text {
-  background: linear-gradient(to right, #d97706, #fbbf24);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
 /* Glassmorphism Specific Utilities */
-.backdrop-blur-xs {
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-}
-
 .backdrop-blur-sm {
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
 }
-
 .backdrop-blur-md {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
-
 .backdrop-blur-lg {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
-
-.backdrop-blur-xl {
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
-
-.backdrop-blur-2xl {
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-}
-
 .backdrop-blur-3xl {
   backdrop-filter: blur(32px);
   -webkit-backdrop-filter: blur(32px);

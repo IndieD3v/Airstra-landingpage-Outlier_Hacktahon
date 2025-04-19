@@ -92,7 +92,7 @@ const MembershipPlans = () => {
     <div className="section-container" id="benefits" ref={sectionRef}>
       <div className="text-center mb-16 space-y-4 membership-title">
         <h2 className="text-3xl md:text-4xl font-serif font-bold">
-          <span className="gold-gradient-text">Membership</span> Plans
+          <span className="text-primary">Membership</span> Plans
         </h2>
         <p className="text-gray-500 max-w-2xl mx-auto">
           Choose the perfect ownership level that aligns with your travel schedule and investment comfort.

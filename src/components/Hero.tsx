@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Plane } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -9,8 +9,6 @@ gsap.registerPlugin(ScrollTrigger);
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
-  const planeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!heroRef.current) return;
@@ -93,14 +91,6 @@ const Hero = () => {
         <div className="parallax-layer absolute bottom-[5%] left-[10%] md:left-[30%] w-36 h-36 md:w-72 md:h-72 rounded-full bg-white/30 blur-3xl"></div>
       </div>
 
-      {/* Removed the fixed right positioning for better mobile flow */}
-      <div ref={planeRef} className="absolute z-20 top-[15%] right-1/2 transform translate-x-1/2 md:right-[5%] md:translate-x-0">
-        {/* <Plane className="text-amber-600 h-10 w-10 md:h-16 md:w-16 transform -rotate-45" /> */}
-      </div>
-
-      <div className="flying-plane absolute z-20 left-5 top-1/4 md:left-0 md:top-1/3">
-        {/* <Plane className="text-amber-600 h-6 w-6 md:h-8 md:w-8 transform -rotate-12" /> */}
-      </div>
 
       <div ref={textRef} className="section-container gap-4 relative z-10 -mt-[150px] md:-mt-[200px] flex w-full md:w-1/2 flex-col items-center text-center px-4 sm:px-6">
         <div className="space-y-4 md:space-y-6">

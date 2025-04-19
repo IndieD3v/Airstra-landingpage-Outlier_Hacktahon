@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
-import { Button } from "@/components/ui/button";
-import { PlaneTakeoff } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+import { PlaneTakeoff } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import AircraftCarousel from "./AircraftCarousel";
 
 gsap.registerPlugin(ScrollTrigger);

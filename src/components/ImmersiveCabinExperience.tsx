@@ -1,9 +1,11 @@
 
-import { useState, useEffect, useRef } from "react";
-import { ArrowRight, Star, Bed, Headphones, Utensils, Users, Eye } from "lucide-react";
-import { useLayoutEffect, } from "react";
+import { useState, useEffect, useRef, useLayoutEffect } from "react";
+
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+import { ArrowRight, Star, Bed, Headphones, Utensils, Users, Eye } from "lucide-react";
+
 
 const ImmersiveCabinExperience = () => {
   const [activeFeature, setActiveFeature] = useState(0);
@@ -12,35 +14,6 @@ const ImmersiveCabinExperience = () => {
   const [isRevealed, setIsRevealed] = useState(false);
   const interiorRef = useRef<HTMLDivElement>(null);
   
-  gsap.registerPlugin(ScrollTrigger);
-
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-
-      gsap.from(".text-container", {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: ".container",
-          start: "top 80%",
-        },
-      });
-
-      gsap.from(".cabin", {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: ".container",
-          start: "top 80%",
-        },
-      });
-    });
-    return () => ctx.revert();
-  }, []);
 
   const cabinFeatures = [
     {
@@ -79,6 +52,36 @@ const ImmersiveCabinExperience = () => {
       icon: <Headphones className="w-5 h-5" />
     }
   ];
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+
+      gsap.from(".text-container", {
+        opacity: 0,
+        y: 30,
+        duration: 0.8,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".container",
+          start: "top 80%",
+        },
+      });
+
+      gsap.from(".cabin", {
+        opacity: 0,
+        y: 30,
+        duration: 0.8,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".container",
+          start: "top 80%",
+        },
+      });
+    });
+    return () => ctx.revert();
+  }, []);
 
   // Track cursor position for spotlight effect
   const handleMouseMove = (e: React.MouseEvent) => {

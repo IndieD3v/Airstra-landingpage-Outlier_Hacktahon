@@ -1,14 +1,63 @@
 import { useState, useEffect, useRef } from "react";
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
-import GlobeMap from "./GlobeMap";
-
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+
+import GlobeMap from "./GlobeMap";
 
 const InteractiveGlobeRouteMap = () => {
   const [activeDestination, setActiveDestination] = useState(0);
   const contentRef = useRef(null);
   const bgRef = useRef(null);
+
+  const destinations = [
+    {
+      id: 1,
+      name: "Monte Carlo",
+      country: "Monaco",
+      coordinates: { x: 68, y: 42 },
+      description: "The playground of the elite, Monte Carlo offers unmatched glamour with its famous casino, yacht-filled harbor, and prestigious Grand Prix.",
+      flight_time: "6 hours from London",
+      image: "https://images.unsplash.com/photo-1529963183134-61a90db47eaf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+    },
+    {
+      id: 2,
+      name: "St. Barts",
+      country: "Caribbean",
+      coordinates: { x: 32, y: 52 },
+      description: "This exclusive island paradise combines French sophistication with Caribbean relaxation. Pristine beaches and world-class dining await.",
+      flight_time: "4 hours from Miami",
+      image: "https://images.unsplash.com/photo-1563911302283-d2bc129e7570?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+    },
+    {
+      id: 3,
+      name: "Gstaad",
+      country: "Switzerland",
+      coordinates: { x: 58, y: 38 },
+      description: "A discreet winter playground for the elite, offering world-class skiing, Michelin-starred dining, and luxury chalets.",
+      flight_time: "2 hours from Paris",
+      image: "https://images.unsplash.com/photo-1548777123-e216912df7d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+    },
+    {
+      id: 4,
+      name: "Dubai",
+      country: "United Arab Emirates",
+      coordinates: { x: 75, y: 52 },
+      description: "The epitome of modern luxury with architectural marvels, exclusive shopping, and desert adventures just minutes away.",
+      flight_time: "7 hours from London",
+      image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+    },
+    {
+      id: 5,
+      name: "Bora Bora",
+      country: "French Polynesia",
+      coordinates: { x: 12, y: 70 },
+      description: "The jewel of the South Pacific offers overwater villas, turquoise lagoons, and unparalleled privacy.",
+      flight_time: "8 hours from Los Angeles",
+      image: "https://cdn.moanavoyages.com/img/hotels/4732.jpg"
+    }
+  ];
+
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -77,53 +126,6 @@ const InteractiveGlobeRouteMap = () => {
     return () => ctx.revert();
   }, []);
 
-  const destinations = [
-    {
-      id: 1,
-      name: "Monte Carlo",
-      country: "Monaco",
-      coordinates: { x: 68, y: 42 },
-      description: "The playground of the elite, Monte Carlo offers unmatched glamour with its famous casino, yacht-filled harbor, and prestigious Grand Prix.",
-      flight_time: "6 hours from London",
-      image: "https://images.unsplash.com/photo-1529963183134-61a90db47eaf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-    },
-    {
-      id: 2,
-      name: "St. Barts",
-      country: "Caribbean",
-      coordinates: { x: 32, y: 52 },
-      description: "This exclusive island paradise combines French sophistication with Caribbean relaxation. Pristine beaches and world-class dining await.",
-      flight_time: "4 hours from Miami",
-      image: "https://images.unsplash.com/photo-1563911302283-d2bc129e7570?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-    },
-    {
-      id: 3,
-      name: "Gstaad",
-      country: "Switzerland",
-      coordinates: { x: 58, y: 38 },
-      description: "A discreet winter playground for the elite, offering world-class skiing, Michelin-starred dining, and luxury chalets.",
-      flight_time: "2 hours from Paris",
-      image: "https://images.unsplash.com/photo-1548777123-e216912df7d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-    },
-    {
-      id: 4,
-      name: "Dubai",
-      country: "United Arab Emirates",
-      coordinates: { x: 75, y: 52 },
-      description: "The epitome of modern luxury with architectural marvels, exclusive shopping, and desert adventures just minutes away.",
-      flight_time: "7 hours from London",
-      image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-    },
-    {
-      id: 5,
-      name: "Bora Bora",
-      country: "French Polynesia",
-      coordinates: { x: 12, y: 70 },
-      description: "The jewel of the South Pacific offers overwater villas, turquoise lagoons, and unparalleled privacy.",
-      flight_time: "8 hours from Los Angeles",
-      image: "https://cdn.moanavoyages.com/img/hotels/4732.jpg"
-    }
-  ];
 
   const autoplayRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -210,7 +212,7 @@ const InteractiveGlobeRouteMap = () => {
                   restartAutoplay();
                 }}
               >
-                <ChevronLeft size={20}  />
+                <ChevronLeft size={20} />
               </button>
               <button
                 className=" z-20 bg-black/30 hover:bg-black/50 p-2 rounded-full text-white transition-all"
@@ -220,7 +222,7 @@ const InteractiveGlobeRouteMap = () => {
                   restartAutoplay();
                 }}
               >
-                <ChevronRight size={20}  />
+                <ChevronRight size={20} />
               </button>
             </div>
 
